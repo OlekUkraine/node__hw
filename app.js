@@ -73,7 +73,7 @@ const createFolderAndFile = async () => {
     });
 }
 
-createFolderAndFile();
+createFolderAndFile().then();
 
 
 
