@@ -13,4 +13,7 @@ export const configs = {
 
   LIFETIME_ACCESS_TOKEN: process.env.LIFETIME_ACCESS_TOKEN,
   LIFETIME_REFRESH_TOKEN: process.env.LIFETIME_REFRESH_TOKEN,
+
+  NO_REPLY_PASS: process.env.NO_REPLY_PASS,
+  NO_REPLY_EMAIL: process.env.NO_REPLY_EMAIL,
 };

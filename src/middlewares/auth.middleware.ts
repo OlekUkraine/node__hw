@@ -17,14 +17,14 @@ class AuthMiddleware {
         throw new ApiError("no token", 401);
       }
 
-      tokenService.checkToken(accessToken);
+      const payload = tokenService.checkToken(accessToken);
 
       const entity = await Token.findOne({ accessToken });
       if (!entity) {
         throw new ApiError("Token not valid", 401);
       }
 
-      // res.locals.tokenInfo = entity;
+      res.locals.tokenPayload = payload;
       next();
     } catch (e) {
       next(e);
