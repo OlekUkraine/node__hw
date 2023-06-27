@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
+import { EActionTokenTypes, ETokenType } from "../enums";
 import { ApiError } from "../errors";
-import { Token } from "../models";
+import { Action, Token } from "../models";
 import { tokenService } from "../services";
 
 class AuthMiddleware {
@@ -17,7 +18,7 @@ class AuthMiddleware {
         throw new ApiError("no token", 401);
       }
 
-      const payload = tokenService.checkToken(accessToken);
+      const payload = tokenService.checkToken(accessToken, ETokenType.Access);
 
       const entity = await Token.findOne({ accessToken });
       if (!entity) {
@@ -29,6 +30,62 @@ class AuthMiddleware {
     } catch (e) {
       next(e);
     }
+  }
+
+  public async checkRefreshToken(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const refreshToken = req.get("Authorization");
+
+      if (!refreshToken) {
+        throw new ApiError("no token", 401);
+      }
+
+      const payload = tokenService.checkToken(refreshToken, ETokenType.Refresh);
+
+      const entity = await Token.findOne({ refreshToken });
+      if (!entity) {
+        throw new ApiError("Token not valid", 401);
+      }
+
+      res.locals.oldTokenPair = entity;
+      res.locals.tokenPayload = { name: payload.name, _id: payload._id };
+      next();
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public checkActionToken(tokenType: EActionTokenTypes) {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const actionToken = req.params.token;
+
+        if (!actionToken) {
+          throw new ApiError("Token is not provided", 400);
+        }
+
+        const jwtPayload = tokenService.checkActionToken(
+          actionToken,
+          tokenType
+        );
+
+        const tokenFromDB = await Action.findOne({ actionToken });
+
+        if (!tokenFromDB) {
+          throw new ApiError("Token is invalid", 400);
+        }
+
+        req.res.locals = { jwtPayload, tokenFromDB };
+
+        next();
+      } catch (e) {
+        next(e);
+      }
+    };
   }
 }
 export const authMiddleware = new AuthMiddleware();

@@ -3,11 +3,12 @@ import hbs from "nodemailer-express-handlebars";
 import * as path from "path";
 
 import { configs } from "../configs";
-import { allTemplates } from "../constants/email.constants";
-import { EEmailActions } from "../enums/email.enum";
+import { allTemplates } from "../constants";
+import { EEmailActions } from "../enums";
 
 class EmailService {
   private transporter;
+
   constructor() {
     this.transporter = nodemailer.createTransport({
       from: "No reply",
@@ -48,6 +49,9 @@ class EmailService {
     context: Record<string, string | number> = {}
   ) {
     const { templateName, subject } = allTemplates[emailActions];
+
+    context.frontUrl = configs.FRONT_URL;
+
     const mailOptions = {
       to: email,
       subject,

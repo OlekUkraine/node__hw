@@ -2,13 +2,9 @@ import { model, Schema, Types } from "mongoose";
 
 import { User } from "./User.model";
 
-const tokenSchema = new Schema(
+const passwordSchema = new Schema(
   {
-    accessToken: {
-      type: String,
-      required: true,
-    },
-    refreshToken: {
+    password: {
       type: String,
       required: true,
     },
@@ -18,10 +14,7 @@ const tokenSchema = new Schema(
       ref: User,
     },
   },
-  {
-    versionKey: false,
-    timestamps: true,
-  }
+  { versionKey: false, timestamps: true }
 );
 
-export const Token = model("token", tokenSchema);
+export const OldPassword = model("oldPassword", passwordSchema);
