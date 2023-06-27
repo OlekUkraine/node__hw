@@ -20,7 +20,6 @@ const returnTheUsers = async () => {
       name: user.name,
     });
   });
-  returnUsers.stop();
 };
 
 export const returnUsers = new CronJob("0 4 * * *", returnTheUsers);
