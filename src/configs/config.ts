@@ -22,4 +22,11 @@ export const configs = {
 
   NO_REPLY_PASS: process.env.NO_REPLY_PASS,
   NO_REPLY_EMAIL: process.env.NO_REPLY_EMAIL,
+
+  AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
+  AWS_SECRET_KEY: process.env.AWS_SECRET_KEY,
+  AWS_S3_REGION: process.env.AWS_S3_REGION,
+  AWS_S3_NAME: process.env.AWS_S3_NAME,
+  AWS_S3_ACL: process.env.AWS_S3_ACL,
+  AWS_S3_URL: process.env.AWS_S3_URL,
 };

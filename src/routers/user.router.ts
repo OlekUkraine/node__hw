@@ -1,7 +1,11 @@
 import { Router } from "express";
 
 import { userController } from "../controllers";
-import { authMiddleware, commonMiddleware } from "../middlewares";
+import {
+  authMiddleware,
+  commonMiddleware,
+  fileMiddleware,
+} from "../middlewares";
 import { UserValidator } from "../validators";
 
 const router = Router();
@@ -30,6 +34,19 @@ router.get(
   "/gender/:userGender",
   authMiddleware.checkAccessToken,
   userController.findByGender
+);
+router.post(
+  "/:userId/avatar",
+  authMiddleware.checkAccessToken,
+  commonMiddleware.isIdValid("userId"),
+  fileMiddleware.isAvatarValid,
+  userController.uploadAvatar
+);
+router.delete(
+  "/:userId/avatar",
+  authMiddleware.checkAccessToken,
+  commonMiddleware.isIdValid("userId"),
+  userController.deleteAvatar
 );
 
 export const userRouter = router;
