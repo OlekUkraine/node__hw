@@ -49,6 +49,28 @@ class S3Service {
     );
   }
 
+  public async uploadFileStream(
+    stream: any,
+    file: UploadedFile,
+    itemType: string,
+    itemId: string
+  ): Promise<string> {
+    const { mimetype, size, name } = file;
+    const filePath = this.buildPath(itemType, itemId, name);
+
+    await this.client.send(
+      new PutObjectCommand({
+        Bucket: configs.AWS_S3_NAME,
+        Key: filePath,
+        Body: stream,
+        ACL: configs.AWS_S3_ACL,
+        ContentType: mimetype,
+        ContentLength: size,
+      })
+    );
+    return filePath;
+  }
+
   private buildPath(type: string, id: string, fileName: string): string {
     return `${type}/${id}/${v4()}${path.extname(fileName)}`;
   }
