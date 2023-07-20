@@ -16,6 +16,10 @@ const userSchema = new Schema(
       type: String,
       enum: EGenders,
     },
+    phone: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -33,6 +37,10 @@ const userSchema = new Schema(
       enum: EUserStatus,
     },
     avatar: {
+      type: String,
+      required: false,
+    },
+    video: {
       type: String,
       required: false,
     },

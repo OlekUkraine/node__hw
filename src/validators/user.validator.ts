@@ -7,6 +7,7 @@ export class UserValidator {
   static firstName = Joi.string().min(3).max(30).trim();
   static age = Joi.number().min(1).max(150);
   static gender = Joi.string().valid(...Object.values(EGenders));
+  static phone = Joi.string().regex(regexConstants.PHONE).trim();
   static email = Joi.string().lowercase().regex(regexConstants.EMAIL).trim();
   static password = Joi.string().regex(regexConstants.PASSWORD).trim();
 
@@ -14,6 +15,7 @@ export class UserValidator {
     name: this.firstName.required(),
     age: this.age.required(),
     gender: this.gender.required(),
+    phone: this.phone.required(),
     email: this.email.required(),
     password: this.password.required(),
   });

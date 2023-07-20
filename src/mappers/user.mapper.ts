@@ -10,6 +10,7 @@ class UserMapper {
       gender: user.gender ? user.gender : null,
       email: user.email ? user.email : null,
       avatar: user.avatar ? `${configs.AWS_S3_URL}/${user.avatar}` : null,
+      video: user.video ? `${configs.AWS_S3_URL}/${user.video}` : null,
     };
   }
 }
