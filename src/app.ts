@@ -43,6 +43,7 @@ server.listen(configs.PORT, async () => {
     // eslint-disable-next-line no-console
     console.log(`Server has started on PORT ${configs.PORT} 👌`);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
   }
 });
