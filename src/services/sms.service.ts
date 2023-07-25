@@ -1,8 +1,8 @@
 import { Twilio } from "twilio";
 
 import { configs } from "../configs";
-import {ESmsActions} from "../enums";
-import {smsTemplates} from "../constants";
+import { smsTemplates } from "../constants";
+import { ESmsActions } from "../enums";
 
 class SmsService {
   constructor(

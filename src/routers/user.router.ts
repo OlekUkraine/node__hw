@@ -49,10 +49,10 @@ router.delete(
   userController.deleteAvatar
 );
 router.post(
-    "/:userId/video",
-    authMiddleware.checkAccessToken,
-    commonMiddleware.isIdValid("userId"),
-    userController.uploadVideo
+  "/:userId/video",
+  authMiddleware.checkAccessToken,
+  commonMiddleware.isIdValid("userId"),
+  userController.uploadVideo
 );
 
 export const userRouter = router;

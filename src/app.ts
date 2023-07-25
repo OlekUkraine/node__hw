@@ -4,10 +4,12 @@ import express, { Request, Response } from "express";
 import fileUpload from "express-fileupload";
 import * as mongoose from "mongoose";
 import socketIO from "socket.io";
+import * as swaggerUi from "swagger-ui-express";
 
 import { configs } from "./configs";
 import { cronRunner } from "./crons";
 import { authRouter, userRouter } from "./routers";
+import * as swaggerJson from "./utils/swagger.json";
 
 const app = express();
 
@@ -17,6 +19,7 @@ app.use(fileUpload());
 
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerJson));
 
 app.use((error: any, req: Request, res: Response) => {
   const status = error.status || 500;

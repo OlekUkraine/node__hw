@@ -21,7 +21,6 @@ module.exports = {
         jest: true,
     },
     rules: {
-        '@typescript-eslint/return-await': ['error', 'always'],
         '@typescript-eslint/no-unused-vars': ['error', {
             argsIgnorePattern: 'req|res|next'
         }],
