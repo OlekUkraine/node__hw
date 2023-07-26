@@ -95,6 +95,45 @@
           }
         ]
       }
+    },
+    "/users/{userId}/avatar": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "description": "get user avatar by id",
+        "produces": [
+          "application/json"
+        ],
+        "summary": "user avatar by id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of user to return",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Additional data to pass to server",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "fksdvh7serjlw98psfkc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RETURNED USER AVATAR BY ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
