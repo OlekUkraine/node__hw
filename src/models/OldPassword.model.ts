@@ -14,7 +14,7 @@ const passwordSchema = new Schema(
       ref: User,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 export const OldPassword = model("oldPassword", passwordSchema);

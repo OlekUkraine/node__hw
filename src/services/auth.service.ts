@@ -17,7 +17,7 @@ class AuthService {
 
       const actionToken = tokenService.generationActionToken(
         { _id: user._id },
-        EActionTokenTypes.Activate
+        EActionTokenTypes.Activate,
       );
 
       await Promise.all([
@@ -38,12 +38,12 @@ class AuthService {
 
   public async login(
     credentials: ICredentials,
-    user: IUser
+    user: IUser,
   ): Promise<ITokenPair> {
     try {
       const isMatched = await passwordService.compare(
         credentials.password,
-        user.password
+        user.password,
       );
 
       if (!isMatched) {
@@ -68,7 +68,7 @@ class AuthService {
 
   public async refresh(
     oldTokenPair: ITokenPair,
-    tokenPayload: ITokenPayload
+    tokenPayload: ITokenPayload,
   ): Promise<ITokenPair> {
     try {
       const tokensPair = await tokenService.generateTokenPair(tokenPayload);
@@ -86,7 +86,7 @@ class AuthService {
 
   public async changePassword(
     dto: { newPassword: string; oldPassword: string },
-    userId: string
+    userId: string,
   ): Promise<void> {
     try {
       const oldPasswords = await OldPassword.find({ _userId: userId });
@@ -94,20 +94,20 @@ class AuthService {
         oldPasswords.map(async ({ password: hash }) => {
           const isMatched = await passwordService.compare(
             dto.oldPassword,
-            hash
+            hash,
           );
 
           if (isMatched) {
             throw new ApiError("Wrong old password", 400);
           }
-        })
+        }),
       );
 
       const user = await User.findById(userId).select("password");
 
       const isMatched = await passwordService.compare(
         dto.oldPassword,
-        user.password
+        user.password,
       );
 
       if (!isMatched) {
@@ -126,12 +126,12 @@ class AuthService {
 
   public async forgotPassword(
     userId: Types.ObjectId,
-    email: string
+    email: string,
   ): Promise<void> {
     try {
       const actionToken = tokenService.generationActionToken(
         { _id: userId },
-        EActionTokenTypes.Forgot
+        EActionTokenTypes.Forgot,
       );
 
       await Promise.all([
@@ -152,7 +152,7 @@ class AuthService {
   public async setForgotPassword(
     password: string,
     userId: Types.ObjectId,
-    actionToken: string
+    actionToken: string,
   ): Promise<void> {
     const hashedPassword = await passwordService.hash(password);
 

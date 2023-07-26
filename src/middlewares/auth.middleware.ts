@@ -9,7 +9,7 @@ class AuthMiddleware {
   public async checkAccessToken(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<void> {
     try {
       const accessToken = req.get("Authorization");
@@ -35,7 +35,7 @@ class AuthMiddleware {
   public async checkRefreshToken(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<void> {
     try {
       const refreshToken = req.get("Authorization");
@@ -70,7 +70,7 @@ class AuthMiddleware {
 
         const jwtPayload = tokenService.checkActionToken(
           actionToken,
-          tokenType
+          tokenType,
         );
 
         const tokenFromDB = await Action.findOne({ actionToken });

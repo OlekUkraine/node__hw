@@ -8,8 +8,8 @@ class SmsService {
   constructor(
     private client = new Twilio(
       configs.TWILIO_ACCOUNT_SID,
-      configs.TWILIO_TOKEN
-    )
+      configs.TWILIO_TOKEN,
+    ),
   ) {}
 
   public async sendSms(phone: string, actionType: ESmsActions) {

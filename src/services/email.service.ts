@@ -27,13 +27,13 @@ class EmailService {
           process.cwd(),
           "src",
           "email-templates",
-          "layouts"
+          "layouts",
         ),
         partialsDir: path.join(
           process.cwd(),
           "src",
           "email-templates",
-          "partials"
+          "partials",
         ),
       },
       viewPath: path.join(process.cwd(), "src", "email-templates", "views"),
@@ -46,7 +46,7 @@ class EmailService {
   public async sendMail(
     email: string,
     emailActions: EEmailActions,
-    context: Record<string, string | number> = {}
+    context: Record<string, string | number> = {},
   ) {
     const { templateName, subject } = allTemplates[emailActions];
 

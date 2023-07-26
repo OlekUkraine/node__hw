@@ -27,7 +27,7 @@ class UserService {
     return await User.findOneAndUpdate(
       { _id: id },
       { ...data },
-      { returnDocument: "after" }
+      { returnDocument: "after" },
     );
   }
 
@@ -37,7 +37,7 @@ class UserService {
 
   public async uploadAvatar(
     userId: string,
-    avatar: UploadedFile
+    avatar: UploadedFile,
   ): Promise<IUser> {
     const user = await this.getOneByIdOrThrow(userId);
     const pathToFile = await s3Service.uploadFile(avatar, "user", userId);
@@ -49,7 +49,7 @@ class UserService {
     return await User.findByIdAndUpdate(
       userId,
       { $set: { avatar: pathToFile } },
-      { new: true }
+      { new: true },
     );
   }
 
@@ -65,7 +65,7 @@ class UserService {
     return await User.findByIdAndUpdate(
       userId,
       { $unset: { avatar: true } },
-      { new: true }
+      { new: true },
     );
   }
 
@@ -73,7 +73,7 @@ class UserService {
     return await User.findByIdAndUpdate(
       userId,
       { $set: { video: pathToFile } },
-      { new: true }
+      { new: true },
     );
   }
 

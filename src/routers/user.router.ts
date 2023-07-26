@@ -15,44 +15,44 @@ router.get(
   "/:userId",
   commonMiddleware.isIdValid("userId"),
   authMiddleware.checkAccessToken,
-  userController.findById
+  userController.findById,
 );
 router.put(
   "/:userId",
   commonMiddleware.isIdValid("userId"),
   commonMiddleware.isBodyValid(UserValidator.update),
   authMiddleware.checkAccessToken,
-  userController.updateById
+  userController.updateById,
 );
 router.delete(
   "/:userId",
   commonMiddleware.isIdValid("userId"),
   authMiddleware.checkAccessToken,
-  userController.deleteById
+  userController.deleteById,
 );
 router.get(
   "/gender/:userGender",
   authMiddleware.checkAccessToken,
-  userController.findByGender
+  userController.findByGender,
 );
 router.post(
   "/:userId/avatar",
   authMiddleware.checkAccessToken,
   commonMiddleware.isIdValid("userId"),
   fileMiddleware.isAvatarValid,
-  userController.uploadAvatar
+  userController.uploadAvatar,
 );
 router.delete(
   "/:userId/avatar",
   authMiddleware.checkAccessToken,
   commonMiddleware.isIdValid("userId"),
-  userController.deleteAvatar
+  userController.deleteAvatar,
 );
 router.post(
   "/:userId/video",
   authMiddleware.checkAccessToken,
   commonMiddleware.isIdValid("userId"),
-  userController.uploadVideo
+  userController.uploadVideo,
 );
 
 export const userRouter = router;

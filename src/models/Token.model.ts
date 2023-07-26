@@ -21,7 +21,7 @@ const tokenSchema = new Schema(
   {
     versionKey: false,
     timestamps: true,
-  }
+  },
 );
 
 export const Token = model("token", tokenSchema);

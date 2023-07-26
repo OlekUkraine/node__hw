@@ -9,7 +9,7 @@ class PasswordService {
 
   public async compare(
     password: string,
-    hashedPassword: string
+    hashedPassword: string,
   ): Promise<boolean> {
     return await bcrypt.compare(password, hashedPassword);
   }

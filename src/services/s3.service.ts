@@ -18,13 +18,13 @@ class S3Service {
         accessKeyId: configs.AWS_ACCESS_KEY,
         secretAccessKey: configs.AWS_SECRET_KEY,
       },
-    })
+    }),
   ) {}
 
   public async uploadFile(
     file: UploadedFile,
     itemType: "user",
-    itemId: string
+    itemId: string,
   ): Promise<string> {
     const filePath = this.buildPath(itemType, itemId, file.name);
 
@@ -35,7 +35,7 @@ class S3Service {
         Body: file.data,
         ACL: configs.AWS_S3_ACL,
         ContentType: file.mimetype,
-      })
+      }),
     );
     return filePath;
   }
@@ -45,7 +45,7 @@ class S3Service {
       new DeleteObjectCommand({
         Bucket: configs.AWS_S3_NAME,
         Key: filePath,
-      })
+      }),
     );
   }
 
@@ -53,7 +53,7 @@ class S3Service {
     stream: any,
     file: UploadedFile,
     itemType: string,
-    itemId: string
+    itemId: string,
   ): Promise<string> {
     const { mimetype, size, name } = file;
     const filePath = this.buildPath(itemType, itemId, name);
@@ -66,7 +66,7 @@ class S3Service {
         ACL: configs.AWS_S3_ACL,
         ContentType: mimetype,
         ContentLength: size,
-      })
+      }),
     );
     return filePath;
   }

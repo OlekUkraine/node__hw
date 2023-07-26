@@ -12,7 +12,7 @@ class UserController {
   public async findAll(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<Response<IUser[]>> {
     try {
       const users = await userService.findAll();
@@ -26,7 +26,7 @@ class UserController {
   public async findById(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<Response<IUser>> {
     try {
       const users = await userService.findById(req.params.userId);
@@ -39,7 +39,7 @@ class UserController {
   public async updateById(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<Response<IUser>> {
     try {
       const { userId } = req.params;
@@ -54,7 +54,7 @@ class UserController {
   public async findByGender(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<Response<IUser[]>> {
     try {
       const users = await userService.findByGender(req.params.userGender);
@@ -67,7 +67,7 @@ class UserController {
   public async deleteById(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<Response<IUser>> {
     try {
       const { userId } = req.params;
@@ -82,7 +82,7 @@ class UserController {
   public async uploadAvatar(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<Response<IUser>> {
     try {
       const { userId } = req.params;
@@ -101,7 +101,7 @@ class UserController {
   public async deleteAvatar(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<Response<void>> {
     try {
       const { userId } = req.params;
@@ -118,7 +118,7 @@ class UserController {
   public async uploadVideo(
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<any> {
     try {
       const { userId } = req.params;
@@ -136,7 +136,7 @@ class UserController {
           stream,
           video,
           "video",
-          userId
+          userId,
         );
         const user = await userService.uploadVideo(userId, pathToVideo);
         const response = userMapper.toResponse(user);

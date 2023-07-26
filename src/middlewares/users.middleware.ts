@@ -9,11 +9,11 @@ class UsersMiddleware {
     return async (
       req: Request,
       res: Response,
-      next: NextFunction
+      next: NextFunction,
     ): Promise<void> => {
       try {
         const user = await User.findOne({ [field]: req.body[field] }).select(
-          "+password"
+          "+password",
         );
 
         if (!user) {
@@ -32,11 +32,11 @@ class UsersMiddleware {
     return async (
       req: Request,
       res: Response,
-      next: NextFunction
+      next: NextFunction,
     ): Promise<void> => {
       try {
         const user = await User.findOne({ [field]: req.body[field] }).select(
-          "password"
+          "password",
         );
         if (user) {
           throw new ApiError("User with this email already exist", 409);

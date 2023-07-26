@@ -41,7 +41,7 @@ class TokenService {
 
   public checkActionToken(
     token: string,
-    type: EActionTokenTypes
+    type: EActionTokenTypes,
   ): ITokenPayload {
     try {
       let secret: string;
@@ -63,7 +63,7 @@ class TokenService {
 
   public generationActionToken(
     payload: ITokenPayload,
-    tokenType: EActionTokenTypes
+    tokenType: EActionTokenTypes,
   ): string {
     let secret;
 

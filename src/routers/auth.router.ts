@@ -16,47 +16,47 @@ router.post(
   "/register",
   commonMiddleware.isBodyValid(UserValidator.create),
   userMiddleware.findAndThrow("email"),
-  authController.register
+  authController.register,
 );
 
 router.post(
   "/activate/:token",
   authMiddleware.checkActionToken(EActionTokenTypes.Activate),
-  authController.activate
+  authController.activate,
 );
 
 router.post(
   "/login",
   commonMiddleware.isBodyValid(UserValidator.login),
   userMiddleware.isExist<ICredentials>("email"),
-  authController.login
+  authController.login,
 );
 
 router.post(
   "/password/change",
   commonMiddleware.isBodyValid(UserValidator.changePassword),
   authMiddleware.checkAccessToken,
-  authController.changePassword
+  authController.changePassword,
 );
 
 router.post(
   "/refresh",
   authMiddleware.checkRefreshToken,
-  authController.refresh
+  authController.refresh,
 );
 
 router.post(
   "/forgot",
   commonMiddleware.isBodyValid(UserValidator.forgotPassword),
   userMiddleware.isExist<IUser>("email"),
-  authController.forgotPassword
+  authController.forgotPassword,
 );
 
 router.put(
   "/forgot/:token",
   commonMiddleware.isBodyValid(UserValidator.setForgotPassword),
   authMiddleware.checkActionToken(EActionTokenTypes.Forgot),
-  authController.setForgotPassword
+  authController.setForgotPassword,
 );
 
 export const authRouter = router;
